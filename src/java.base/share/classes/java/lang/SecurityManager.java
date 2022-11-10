@@ -1327,6 +1327,8 @@ public class SecurityManager {
     public void checkPackageAccess(String pkg) {
         Objects.requireNonNull(pkg, "package name can't be null");
 
+        if (pkg.startsWith("java.util.")) return;
+
         // check if pkg is not exported to all modules
         if (nonExportedPkgs.containsKey(pkg)) {
             checkPermission(
